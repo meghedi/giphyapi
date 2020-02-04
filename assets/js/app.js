@@ -46,7 +46,7 @@ function createButton(title) {
 
 $(document).on('click','.topics', function(){
     let topic = $(this).attr('data-topic');
-    let mainUrl = "http://api.giphy.com/v1/gifs/search?q=" + topic + "&limit=10&api_key=" + apiKey;
+    let mainUrl = "https://api.giphy.com/v1/gifs/search?q=" + topic + "&limit=10&api_key=" + apiKey;
     getTheGiphy(topic, mainUrl);
 });
 

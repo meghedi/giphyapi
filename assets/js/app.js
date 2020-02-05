@@ -3,8 +3,11 @@ var topics = ["grinning", " winking", "kissing"];
 let emojiData;
 
 function displayButtons() {
-    console.log(topics);
     $('#topicButtons').empty();
+    if(localStorage.getItem('topics')!=null){
+        topics = JSON.parse(localStorage.getItem('topics'));
+    }
+    console.log(topics);
     for (var i = 0; i < topics.length; i++) {
         let topic = topics[i];
         createButton(topic);
@@ -60,6 +63,7 @@ $('#submitEmojiBtn').click(function () {
     if ($('#addEmoji').val().trim() != '') {
         emojiData = $('#addEmoji').val().trim();
         topics.push(emojiData);
+        localStorage.setItem("topics", JSON.stringify(topics));
         displayButtons();
     }
 });
@@ -73,6 +77,13 @@ $(document).on('mouseover', 'img', function () {
         $(this).attr('src', $(this).data('still'));
         $(this).attr('data-status', 'still');
     }
+});
+$(document).on('mouseout', 'img', function () {
+    dataStatus = $(this).attr('data-status');
+    if (dataStatus === 'animate') {
+        $(this).attr('src', $(this).data('still'));
+        $(this).attr('data-status', 'still');
+    } 
 });
 
 displayButtons();
